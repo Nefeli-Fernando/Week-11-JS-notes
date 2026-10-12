@@ -56,55 +56,96 @@ let customer = [
 // console.log(parsedCustomer);
 
 
-// --------------- CRUD operations in localStorage--------------------
-let customerArray = JSON.parse(localStorage.getItem('detailsList')) || [];
-function btnaddCustomrOnAction() {
-    const addButton = document.getElementById('text');
-    const addValues =  addButton.value();
+// ---------------------- CRUD operations in localStorage--------------------
 
-    if(!addValues){  //if values arent added
-            alert("Customer has been Added!");
-            return;
+let customerList = JSON.parse(localStorage.getItem("customerList")) || [];
+
+function btnaddCustomrOnAction() {
+    let customer = {
+        id:document.getElementById("txtid").value,
+        name:document.getElementById("txtname").value,
+        age:document.getElementById("txtage").value,
+        address:document.getElementById("txtaddress").value
     }
 
-    const newObject = {
-        id : document.GetElementById(txtId).value,
-        name : document.GetElementById(txtName).value,
-        age : document.GetElementById(txtAge).value,
-        address : document.GetElementById(txtAddress).value
-    };
-
-    customerArray.push(newObject);
-    localStorage.setItem('detailsList', JSON.stringify(customerArray));
-
-    addButton.value = ' ';
-    
+    if(customer = customerList.find(c => c.id === id)){
+        alert("Customer has already been added to the system")
+    // console.log(customer);
+    customerList.push(customer);
+    // console.log(customerList);
+    localStorage.setItem("customerList", JSON.stringify(customerList));
+    btnLoadTableOnAction();
+    }
 }
 
-
-
-
-
-
-
-
 function btnSearchCustomrOnAction() {
-    alert("search customer");
+    let id = document.getElementById("txtid").value
+    let customer = customerList.find(c => c.id === id);
+    
+    if(customer){
+        document.getElementById("txtname").value = customer.name;
+        document.getElementById("txtage").value = customer.age;
+        document.getElementById("txtaddress").value = customer.address;
+
+
+    }else{
+        alert("Customer cannot be found in the system");
+    }
 }
 
 function btnDeleteCustomrOnAction() {
-    alert("delete customer");
-}
+    let id = document.getElementById("txtid").value
+
+    let index = customerList.findIndex(c => c.id === id);
+
+    if(index !== -1 ){
+        customerList.splice(index,1);
+        localStorage.setItem("customerlist",JSON.stringify(customerList));
+        btnLoadTableOnAction();
+    }else{
+        alert("Customer does not exist");
+    }
+    }
 
 function btnUpdateCustomrOnAction() {
-    alert("update customer");
+    let id = document.getElementById("txtid").value
+    let customer = customerList.find(c => c.id === id);
+    
+    if(customer){
+        document.getElementById("txtname").value = customer.name;
+        document.getElementById("txtage").value = customer.age;
+        document.getElementById("txtaddress").value = customer.address;
+
+
+    }else{
+        alert("Customer cannot be found in the system");
+    }
 }
 
 function btnClearStorageOnAction() {
-    localStorage.clear(); //clears the local Storage in the browser
-    customerList = []; //clears the array
+    localStorage.clear();
+    customerList = [];
 }
 
+function btnLoadTableOnAction() {
+    // alert("load table");
+
+    let tblbdy = "";
+
+    customerList.forEach(customer => {
+        tblbdy += `
+            <tr>
+            <td>${customer.id}</td>
+            <td>${customer.name}</td>
+            <td>${customer.age}</td>
+            <td>${customer.address}</td>
+        </tr>
+        `;
+    });
+    document.getElementById("tblCustomer").innerHTML = tblbdy;
+}
+/*
+btnLoadTableOnAction();
 function btnLoadTableOnAction() {
     alert("load table");
 
@@ -122,4 +163,4 @@ function btnLoadTableOnAction() {
 
     }
 }
-
+*/
