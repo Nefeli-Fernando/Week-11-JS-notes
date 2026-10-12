@@ -1,39 +1,19 @@
-//----------------- Product List -----------------
-/*
-
-
-
-fetch('https://fakestoreapi.com/products').then(res => res.json()).then(data => {
-   console.log(data);
-
-   let productContainer = document.getElementById("productContainer")
-
-   let productBody = "";
-
-   data.forEach(element => {
-    productBody += `
-     <div class="col">
-                        <div class="card shadow-sm"> 
-                         <img src="${element.image}"  alt="" class="card-img-top" style="height: 300px; width:100%; object-fit: contain;" >
-                            <div class="card-body">
-                                <h5 class="card-title">${element.title}</h5>
-                                <p class="card-text">${element.description}</p>
-                                <div class="d-flex justify-content-between align-items-center">
-                                    <div class="btn-group"> <button type="button"
-                                            class="btn btn-sm  bg-success">Buy $${element.price}</button> </div> <small
-                                        class="text-body-secondary">⭐${element.rating.rate}/${element.rating.count}</small>
-                                </div>
-                            </div>
-                        </div>
-                    </div>`
-   });
-
-   productContainer.innerHTML = productBody;
-   
-});
-
-*/
-
-
 
 ////////////LOCAL STORAGEE///
+
+
+console.log("HEYY wassup");
+//localStorage.clear(); //clears your storage
+
+//ADDING ITEMS TO LOCAL STORAGE
+localStorage.setItem("name" , "Nefeli");
+localStorage.setItem("age" , "30");
+localStorage.setItem("city" , "Rathmalana"); 
+localStorage.setItem("anime", "One piece")
+
+//REMOVING ITEMS FROM LOCAL STORAGE
+localStorage.removeItem("age");
+
+//READ DATA FROM LOCAL STORAGE
+let name = localStorage.getItem("name");
+console.log(name);
